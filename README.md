@@ -67,6 +67,7 @@ The configuration of the example vhosts uses **separate** sockets for
 IPv6 and IPv4. This way is simpler for those not (yet) having IPv6
 support to disable it by commenting out the
 [`listen`](http://nginx.org/en/docs/http/ngx_http_core_module.html#listen)
+directive with the `ipv6only=on` parameter.
 
 Note that the IPv6 address uses an IP _stolen_ from the
 [IPv6 Wikipedia page](https://en.wikipedia.org/wiki/IPv6). You **must
