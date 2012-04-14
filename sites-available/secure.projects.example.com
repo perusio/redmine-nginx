@@ -4,7 +4,10 @@
 server {
     ## This is to avoid the spurious if for sub-domain name
     ## rewriting. See http://wiki.nginx.org/Pitfalls#Server_Name.
-    listen [::]:80;
+    listen 80;
+    ## Replace the IPv6 address by your own address. The address below
+    ## was stolen from the wikipedia page on IPv6.
+    listen [fe80::202:b3ff:fe1e:8329]:80;
     server_name secure.projects.example.com;
     ## Use only HTTPS.
     return 301 https://secure.projects.example.com$request_uri;
@@ -14,8 +17,12 @@ server {
 server {
     ## This is to avoid the spurious if for sub-domain name
     ## rewriting. See http://wiki.nginx.org/Pitfalls#Server_Name.
-    listen [::]:80;
-    listen [::]:443 ssl;
+    listen 80;
+    listen 443;
+    ## Replace the IPv6 address by your own address. The address below
+    ## was stolen from the wikipedia page on IPv6.
+    listen [fe80::202:b3ff:fe1e:8329]:80;
+    listen [fe80::202:b3ff:fe1e:8329]:443 ssl;
     server_name www.secure.projects.example.com;
 
     ## See the keepalive_timeout directive in nginx.conf.
@@ -30,7 +37,11 @@ server {
 
 
 server {
-    listen [::]:443 ssl;
+    listen 443 ssl; # IPv4 socket listening on all addresses.
+    ## Replace the IPv6 address by your own address. The address below
+    ## was stolen from the wikipedia page on IPv6.
+    listen [fe80::202:b3ff:fe1e:8329]:443 ssl ipv6only=on;
+
     limit_conn arbeit 32;
     server_name secure.projects.example.com;
 

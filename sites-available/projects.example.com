@@ -2,7 +2,10 @@
 ### Configuration for redmine with thin.
 
 server {
-    listen [::]:80;
+    listen 80; # IPv4 socket listening on all addresses.
+    ## Replace the IPv6 address by your own address. The address below
+    ## was stolen from the wikipedia page on IPv6.
+    listen [fe80::202:b3ff:fe1e:8329]:80 ipv6only=on;
 
     server_name projects.example.com;
     limit_conn arbeit 32;
@@ -11,6 +14,14 @@ server {
     access_log /var/log/nginx/projects.redmine.access.log;
     error_log /var/log/nginx/projects.redmine.error.log;
 
+
+    ## Protection against illegal HTTP methods. Out of the box only HEAD,
+    ## GET and POST are allowed.
+    if ($not_allowed_method) {
+        return 405;
+    }
+
+    ## The root of the Debian redmine.
     root /usr/share/redmine/public;
 
     ## Error pages for 404 and 50x.
