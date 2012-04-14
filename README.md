@@ -39,7 +39,7 @@
       
 ## HTTP allowed methods made to measure
 
-   For a standard drupal install there's no need for any method
+   For a *standard* redmine install there's no need for any method
    besides `GET`, `HEAD` and `POST`. The allowed methods are
    enumerated in the file `map_block_http_methods.conf`.
    
