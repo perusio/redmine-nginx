@@ -44,7 +44,7 @@ server {
     }
 
     ## All static files will be served directly.
-    location ~* ^.+\.(?:css|js|jpe?g|gif|htc|ico|png|html|xml)$ {
+    location ~* ^.+\.(?:css|js|jpe?g|gif|htc|ico|png|html)$ {
         access_log off;
         expires 30d;
         ## No need to bleed constant updates. Send the all shebang in one
