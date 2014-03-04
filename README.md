@@ -124,13 +124,13 @@ We're also installing
  
  4. Configure thin.
      
-        thin config --config /tmp/redmine.yml --chdir /usr/share/redmine --environment production --socket /var/run/redmine/sockets/thin.sock --daemonize --log /var/log/thin/redmine.log --pid /var/run/thin/redmine.pid --user www-data --group www-data --servers 1
+        thin config --config /tmp/redmine.yml --chdir /usr/share/redmine --environment production --socket /var/lib/redmine/sockets/thin.sock --daemonize --log /var/log/thin/redmine.log --pid /var/lib/thin/redmine.pid --user www-data --group www-data --servers 1
  
     Here we're configuring thin to run with **one server**, to run as
     a **daemon** (in the background), to log at
     `/var/log/thin/redmine.log` to write the PID file at
-    `/var/run/thin/redmine.pid` to create the listeninx UNIX sockets
-    at `/var/run/redmine/sockets` to run with user and group
+    `/var/lib/thin/redmine.pid` to create the listeninx UNIX sockets
+    at `/var/lib/redmine/sockets` to run with user and group
     `www-data` and to run the rails app (redmine) in a **production** setup.
 
     Move the config file to the final location:
@@ -139,15 +139,15 @@ We're also installing
         
     Create and fix the permissions of the sockets directory.
     
-        mkdir -p /var/run/redmine/sockets
+        mkdir -p /var/lib/redmine/sockets
         
-        chown www-data.www-data /var/run/redmine/sockets
+        chown www-data.www-data /var/lib/redmine/sockets
     
  5. Launch thin:
         
         service thin start
         
-    You should see the socket that was created, `ls /var/run/redmine/sockets`:
+    You should see the socket that was created, `ls /var/lib/redmine/sockets`:
     
     `srwxrwxrwx 1 www-data www-data 0 Abr 11 15:42 thin.0.sock`    
  
